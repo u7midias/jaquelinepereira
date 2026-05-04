@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jaqueline Pereira</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --terra: #C4622D;
+    --terra-light: #E8845A;
+    --creme: #F5EDE3;
+    --escuro: #1A1410;
+    --medio: #6B5043;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--creme); color: var(--escuro); }
+
+  /* HERO */
+  .hero {
+    background: var(--escuro);
+    padding: 60px 28px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%; transform: translateX(-50%);
+    width: 300px; height: 300px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,98,45,0.25) 0%, transparent 70%);
+  }
+  .hero-foto {
+    width: 110px; height: 110px; border-radius: 50%;
+    object-fit: cover; object-position: top;
+    border: 2px solid var(--terra);
+    position: relative; z-index: 1;
+    margin-bottom: 20px;
+  }
+  .hero-nome {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px; color: var(--creme); line-height: 1.1;
+    margin-bottom: 6px; position: relative; z-index: 1;
+  }
+  .hero-nome em { color: var(--terra-light); font-style: italic; }
+  .hero-cargo {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: rgba(245,237,227,0.4); margin-bottom: 24px;
+    position: relative; z-index: 1;
+  }
+  .hero-bio {
+    font-size: 15px; line-height: 1.8; color: rgba(245,237,227,0.65);
+    font-weight: 300; max-width: 320px; margin: 0 auto 36px;
+    position: relative; z-index: 1;
+  }
+  .hero-bio strong { color: var(--creme); font-weight: 500; }
+
+  .hero-numeros {
+    display: flex; justify-content: center;
+    border-top: 1px solid rgba(245,237,227,0.08);
+    padding-top: 32px; position: relative; z-index: 1;
+  }
+  .num { flex: 1; }
+  .num + .num { border-left: 1px solid rgba(245,237,227,0.08); }
+  .num-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; color: var(--terra-light); line-height: 1; margin-bottom: 6px;
+  }
+  .num-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,237,227,0.3); }
+
+  /* SEÇÕES */
+  section { padding: 56px 28px; }
+  section + section { border-top: 1px solid rgba(196,98,45,0.1); }
+  .sec-label { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--terra); margin-bottom: 16px; font-weight: 500; }
+  .sec-titulo { font-family: 'Playfair Display', serif; font-size: 28px; line-height: 1.2; color: var(--escuro); margin-bottom: 20px; }
+  .sec-titulo em { color: var(--terra); font-style: italic; }
+  .sec-txt { font-size: 15px; line-height: 1.85; color: var(--medio); font-weight: 300; margin-bottom: 16px; }
+  .sec-txt strong { color: var(--escuro); font-weight: 500; }
+  .sec-txt:last-child { margin-bottom: 0; }
+
+  .formacao-tags { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
+  .tag { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; color: var(--medio); font-weight: 300; }
+  .tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--terra); flex-shrink: 0; }
+
+  /* RESULTADOS */
+  .resultados-wrap { background: var(--escuro); }
+  .resultados-wrap section { padding: 56px 28px; }
+  .resultados-wrap .sec-titulo { color: var(--creme); }
+  .resultados-wrap .sec-titulo em { color: var(--terra-light); }
+  .resultado-item {
+    padding: 24px 0; border-bottom: 1px solid rgba(245,237,227,0.07);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .resultado-item:last-child { border-bottom: none; }
+  .resultado-periodo { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,237,227,0.35); }
+  .resultado-direita { text-align: right; }
+  .resultado-val { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--creme); line-height: 1; }
+  .resultado-obs { font-size: 12px; color: rgba(245,237,227,0.3); margin-top: 2px; font-style: italic; }
+
+  /* MÉTODO */
+  .metodo-card { background: rgba(196,98,45,0.05); border: 1px solid rgba(196,98,45,0.12); padding: 28px 24px; margin-bottom: 12px; }
+  .metodo-card:last-child { margin-bottom: 0; }
+  .metodo-n { font-family: 'Playfair Display', serif; font-size: 40px; color: rgba(196,98,45,0.15); line-height: 1; margin-bottom: 12px; }
+  .metodo-card-titulo { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--escuro); margin-bottom: 8px; }
+  .metodo-card-desc { font-size: 14px; line-height: 1.7; color: var(--medio); font-weight: 300; }
+
+  /* CTA + FORMULÁRIO */
+  .cta { background: var(--terra); padding: 56px 28px; text-align: center; }
+  .cta-titulo { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--creme); line-height: 1.3; margin-bottom: 8px; }
+  .cta-sub { font-size: 15px; color: rgba(245,237,227,0.8); margin-bottom: 36px; font-weight: 300; font-style: italic; }
+
+  .form { display: flex; flex-direction: column; gap: 12px; text-align: left; }
+  .form-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,237,227,0.6); margin-bottom: 4px; display: block; font-weight: 500; }
+  .form-input, .form-textarea {
+    width: 100%; padding: 14px 16px;
+    background: rgba(245,237,227,0.08); border: 1px solid rgba(245,237,227,0.2);
+    color: var(--creme); font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 300;
+    outline: none; transition: border 0.2s;
+  }
+  .form-input::placeholder, .form-textarea::placeholder { color: rgba(245,237,227,0.3); }
+  .form-input:focus, .form-textarea:focus { border-color: rgba(245,237,227,0.6); }
+  .form-textarea { resize: none; height: 80px; }
+  .form-btn {
+    width: 100%; background: var(--creme); color: var(--terra);
+    padding: 16px; font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+    font-weight: 500; border: none; cursor: pointer; margin-top: 8px;
+    transition: background 0.2s; font-family: 'DM Sans', sans-serif;
+  }
+  .form-btn:hover { background: var(--escuro); color: var(--creme); }
+
+  .cta-link {
+    display: block; margin-top: 16px;
+    font-size: 12px; color: rgba(245,237,227,0.5); text-decoration: none;
+    letter-spacing: 1px;
+  }
+  .cta-link:hover { color: rgba(245,237,227,0.8); }
+
+  /* FOOTER */
+  footer { background: var(--escuro); padding: 28px; text-align: center; }
+  .footer-nome { font-family: 'Playfair Display', serif; font-size: 16px; color: rgba(245,237,227,0.3); font-style: italic; }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.on { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <img src="jaque.png" alt="Jaqueline Pereira" class="hero-foto">
+  <h1 class="hero-nome">Jaqueline <em>Pereira</em></h1>
+  <p class="hero-cargo">Empreendedora · Fundadora U7 Mídias</p>
+  <p class="hero-bio">Construí uma agência de marketing do zero. Hoje ajudo social medias a <strong>viver disso de verdade.</strong></p>
+  <div class="hero-numeros">
+    <div class="num">
+      <div class="num-val">6+</div>
+      <div class="num-label">Anos de mercado</div>
+    </div>
+    <div class="num">
+      <div class="num-val">+300k</div>
+      <div class="num-label">Faturados</div>
+    </div>
+    <div class="num">
+      <div class="num-val">U7 Mídias</div>
+      <div class="num-label">Fundadora</div>
+    </div>
+  </div>
+</div>
+
+<!-- SOBRE -->
+<section class="reveal">
+  <p class="sec-label">Quem é</p>
+  <h2 class="sec-titulo">Empreendedora.<br>Não <em>mais uma.</em></h2>
+  <p class="sec-txt">Comecei no marketing digital sem método. Anos errando e aprendendo na prática.</p>
+  <p class="sec-txt">Fundei a <strong>U7 Mídias em 2020</strong>. Construí do zero, errei, ajustei, investi em muito conhecimento — e hoje tenho um negócio real, com número real e estrutura de verdade.</p>
+  <p class="sec-txt">Marketing que funciona não precisa ser pesado. <strong>Esse é o meu trabalho.</strong></p>
+  <div class="formacao-tags">
+    <span class="tag">Formada em Marketing</span>
+    <span class="tag">Pós-graduanda em Business Intelligence</span>
+    <span class="tag">MBA em Inteligência Artificial</span>
+  </div>
+</section>
+
+<!-- RESULTADOS -->
+<div class="resultados-wrap">
+  <section class="reveal">
+    <p class="sec-label" style="color:var(--terra-light)">A agência</p>
+    <h2 class="sec-titulo">U7 Mídias —<br><em>números reais,</em><br>não promessa.</h2>
+    <div style="margin-top: 32px;">
+      <div class="resultado-item">
+        <div class="resultado-periodo">2020 — 2022</div>
+        <div class="resultado-direita">
+          <div class="resultado-val">+100k</div>
+          <div class="resultado-obs">Aprendendo na prática.</div>
+        </div>
+      </div>
+      <div class="resultado-item">
+        <div class="resultado-periodo">2023 — 2024</div>
+        <div class="resultado-direita">
+          <div class="resultado-val">+150k</div>
+          <div class="resultado-obs">Estrutura consolidada.</div>
+        </div>
+      </div>
+      <div class="resultado-item">
+        <div class="resultado-periodo">2025 — 2026</div>
+        <div class="resultado-direita">
+          <div class="resultado-val">+160k</div>
+          <div class="resultado-obs">Melhor fase. Lucro real.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- MÉTODO -->
+<section class="reveal">
+  <p class="sec-label">O método</p>
+  <h2 class="sec-titulo"><em>Empreender é Leve</em></h2>
+  <p class="sec-txt" style="margin-bottom: 28px;">O que aprendi em 6 anos — condensado em 3 pilares.</p>
+  <div class="metodo-card">
+    <div class="metodo-n">01</div>
+    <h3 class="metodo-card-titulo">Posicionamento real</h3>
+    <p class="metodo-card-desc">Sair do genérico e ser lembrada — sem copiar ninguém.</p>
+  </div>
+  <div class="metodo-card">
+    <div class="metodo-n">02</div>
+    <h3 class="metodo-card-titulo">Captação sem pressão</h3>
+    <p class="metodo-card-desc">Atrair o cliente certo sem script, sem desespero, sem se vender barato.</p>
+  </div>
+  <div class="metodo-card">
+    <div class="metodo-n">03</div>
+    <h3 class="metodo-card-titulo">Viver disso de verdade</h3>
+    <p class="metodo-card-desc">Precificação e estrutura. Porque cliente sem organização não vira negócio.</p>
+  </div>
+</section>
+
+<!-- CTA + FORMULÁRIO -->
+<div class="cta reveal">
+  <h2 class="cta-titulo">Você já sabe fazer.<br>Agora deixa eu te ajudar<br>a viver disso.</h2>
+  <p class="cta-sub">Se inscreva para ganhar um diagnóstico gratuito.</p>
+
+  <div class="form">
+    <div>
+      <label class="form-label">Nome</label>
+      <input class="form-input" type="text" id="nome" placeholder="Seu nome completo">
+    </div>
+    <div>
+      <label class="form-label">Qual a sua maior dificuldade?</label>
+      <textarea class="form-textarea" id="dificuldade" placeholder="Conta pra mim..."></textarea>
+    </div>
+    <div>
+      <label class="form-label">Qual nicho você atua?</label>
+      <input class="form-input" type="text" id="nicho" placeholder="Ex: moda, saúde, gastronomia...">
+    </div>
+    <button class="form-btn" onclick="enviarWhatsApp()">Quero meu diagnóstico gratuito</button>
+  </div>
+
+  <a href="https://instagram.com/u7midias" class="cta-link">Conheça a U7 Mídias →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-nome">Jaqueline Pereira · Empreender é Leve</p>
+</footer>
+
+<script>
+  function enviarWhatsApp() {
+    const nome = document.getElementById('nome').value.trim();
+    const dificuldade = document.getElementById('dificuldade').value.trim();
+    const nicho = document.getElementById('nicho').value.trim();
+
+    if (!nome || !dificuldade || !nicho) {
+      alert('Preenche todos os campos pra continuar 😊');
+      return;
+    }
+
+    const msg = `Olá, Jaqueline! Me inscrevi para o diagnóstico gratuito 🙋‍♀️
+
+*Nome:* ${nome}
+*Maior dificuldade:* ${dificuldade}
+*Nicho:* ${nicho}`;
+
+    const url = `https://wa.me/5511934121551?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank');
+  }
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
