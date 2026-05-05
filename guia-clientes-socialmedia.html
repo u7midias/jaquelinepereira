@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Como Conseguir seus Primeiros Clientes</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f5;
+    --card: #ffffff;
+    --accent: #b5541c;
+    --accent2: #d4835a;
+    --accent3: #2d5a3d;
+    --text: #1a1410;
+    --muted: #8a7d72;
+    --border: rgba(181,84,28,0.12);
+    --soft: #f5ede6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Decorative top bar */
+  .top-bar {
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2), #e8b89a);
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* Header */
+  .header {
+    margin-bottom: 52px;
+    animation: fadeUp 0.7s ease both;
+  }
+
+  .from-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+  .from-tag::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 7vw, 58px);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--text);
+    margin-bottom: 18px;
+  }
+
+  h1 span {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 480px;
+    border-left: 2px solid var(--accent2);
+    padding-left: 16px;
+  }
+
+  /* Section label */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+    margin-top: 44px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Error cards */
+  .errors {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+
+  .error-card {
+    background: #fff8f5;
+    border: 1px solid rgba(181,84,28,0.15);
+    border-radius: 12px;
+    padding: 18px 20px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .error-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    transform: scaleY(0);
+    transition: transform 0.25s;
+    transform-origin: bottom;
+  }
+  .error-card:hover::before, .error-card.open::before { transform: scaleY(1); }
+  .error-card:hover { border-color: rgba(181,84,28,0.3); }
+  .error-card.open { border-color: rgba(181,84,28,0.3); background: #fff4ee; }
+
+  .error-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .error-main { flex: 1; }
+  .error-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .error-sub {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  .error-detail {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+  .error-card.open .error-detail { max-height: 200px; }
+
+  .error-detail-inner {
+    padding-top: 14px;
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: #5a4a3f;
+    font-weight: 300;
+    border-top: 1px dashed rgba(181,84,28,0.2);
+    margin-top: 14px;
+  }
+
+  /* Strategy cards */
+  .strategies {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+
+  .strategy {
+    background: var(--card);
+    border: 1px solid #e8e0d8;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    transition: box-shadow 0.3s, transform 0.3s;
+  }
+  .strategy:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+
+  .strategy-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 22px 24px;
+    cursor: pointer;
+  }
+
+  .strategy-num {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .s1 .strategy-num { background: #fdf0e8; color: var(--accent); }
+  .s2 .strategy-num { background: #eaf2ed; color: var(--accent3); }
+
+  .strategy-info { flex: 1; }
+  .strategy-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+  .strategy-desc {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  .arrow {
+    color: var(--muted);
+    font-size: 16px;
+    transition: transform 0.3s;
+  }
+  .strategy.open .arrow { transform: rotate(90deg); }
+
+  .strategy-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1);
+  }
+  .strategy.open .strategy-body { max-height: 1200px; }
+
+  .strategy-content {
+    padding: 0 24px 24px;
+    border-top: 1px solid #f0e8e0;
+    padding-top: 20px;
+  }
+
+  .highlight {
+    background: var(--soft);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #5a3a20;
+    margin-bottom: 18px;
+    font-weight: 400;
+  }
+
+  .steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .step-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .step-circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .s1 .step-circle { background: #fdf0e8; color: var(--accent); }
+  .s2 .step-circle { background: #eaf2ed; color: var(--accent3); }
+
+  .step-text {
+    font-size: 14px;
+    line-height: 1.65;
+    color: #3d2e26;
+    font-weight: 300;
+  }
+  .step-text strong { font-weight: 600; color: var(--text); }
+
+  .example-box {
+    background: #f9f9f7;
+    border: 1px solid #e8e0d8;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-top: 6px;
+  }
+  .example-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .example-text {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: #5a4a3f;
+    font-style: italic;
+  }
+
+  /* Concept section */
+  .concept {
+    background: linear-gradient(135deg, #1a2e22, #2d4a38);
+    border-radius: 16px;
+    padding: 32px;
+    margin-top: 44px;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+
+  .concept-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #86b898;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  .concept-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .concept-text {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #b8cfc0;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+
+  .concept-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .concept-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .concept-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #86b898;
+    flex-shrink: 0;
+    margin-top: 8px;
+  }
+
+  .concept-item-text {
+    font-size: 13.5px;
+    color: #c8ddd0;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 48px;
+    text-align: center;
+    animation: fadeUp 0.7s 0.4s ease both;
+  }
+
+  .footer-line {
+    width: 40px;
+    height: 1px;
+    background: var(--accent2);
+    margin: 0 auto 16px;
+  }
+
+  .footer-text {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-top: 8px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- PÁGINA DE CAPTURA -->
+<div id="capture-page" style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:40px 24px;">
+  <div style="max-width:440px;width:100%;animation:fadeUp 0.7s ease both;">
+
+    <div style="text-align:center;margin-bottom:36px;">
+      <div style="display:inline-block;background:linear-gradient(135deg,rgba(181,84,28,0.12),rgba(212,131,90,0.12));border:1px solid rgba(181,84,28,0.2);border-radius:100px;padding:6px 18px;font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;">✦ Guia gratuito</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(30px,6vw,44px);font-weight:700;line-height:1.1;color:var(--text);margin-bottom:14px;">Como conseguir seus <span style="color:var(--accent);font-style:italic;">primeiros clientes</span> de verdade</h2>
+      <p style="font-size:14px;color:var(--muted);line-height:1.7;font-weight:300;">Preencha os campos abaixo para acessar o guia completo gratuitamente.</p>
+    </div>
+
+    <div style="background:#fff;border:1px solid #e8e0d8;border-radius:16px;padding:32px;box-shadow:0 4px 24px rgba(0,0,0,0.06);">
+
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div>
+          <label style="display:block;font-size:12px;font-weight:600;color:var(--text);margin-bottom:6px;letter-spacing:0.03em;">Seu nome</label>
+          <input id="inp-nome" type="text" placeholder="Como você se chama?" style="width:100%;padding:12px 16px;border:1px solid #e0d8d0;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:var(--text);background:#faf8f5;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#b5541c'" onblur="this.style.borderColor='#e0d8d0'">
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;font-weight:600;color:var(--text);margin-bottom:6px;letter-spacing:0.03em;">Seu e-mail</label>
+          <input id="inp-email" type="email" placeholder="seu@email.com" style="width:100%;padding:12px 16px;border:1px solid #e0d8d0;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:var(--text);background:#faf8f5;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#b5541c'" onblur="this.style.borderColor='#e0d8d0'">
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;font-weight:600;color:var(--text);margin-bottom:6px;letter-spacing:0.03em;">Seu WhatsApp</label>
+          <input id="inp-whatsapp" type="tel" placeholder="(11) 99999-9999" style="width:100%;padding:12px 16px;border:1px solid #e0d8d0;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:var(--text);background:#faf8f5;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#b5541c'" onblur="this.style.borderColor='#e0d8d0'">
+        </div>
+
+        <div id="capture-error" style="display:none;background:#fff5f5;border:1px solid rgba(220,38,38,0.2);border-radius:8px;padding:10px 14px;font-size:13px;color:#dc2626;"></div>
+
+        <button id="btn-acessar" onclick="handleCapture()" style="width:100%;padding:14px;background:linear-gradient(135deg,#b5541c,#d4835a);border:none;border-radius:10px;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:opacity 0.2s;margin-top:4px;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+          Quero acessar o guia →
+        </button>
+
+        <p style="text-align:center;font-size:11px;color:var(--muted);font-weight:300;">Seus dados estão seguros. Sem spam, prometido. 🔒</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CONTEÚDO PRINCIPAL (oculto até preencher) -->
+<div id="main-content" style="display:none;">
+<div class="top-bar"></div>
+
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="from-tag">Guia exclusivo para você</div>
+    <h1>Como conseguir seus <span>primeiros clientes</span> de verdade</h1>
+    <p class="subtitle">Antes de falar de estratégia, preciso te contar onde a maioria das social medias está errando — e por que isso está te custando clientes todos os dias.</p>
+  </div>
+
+  <!-- Errors -->
+  <div class="section-label">Os erros mais comuns</div>
+  <div class="errors">
+
+    <div class="error-card" onclick="toggleError(this)">
+      <div class="error-icon">📱</div>
+      <div class="error-main">
+        <div class="error-title">"Vou postar conteúdo e os clientes vão aparecer"</div>
+        <div class="error-sub">Clique para entender o problema</div>
+        <div class="error-detail">
+          <div class="error-detail-inner">Conteúdo constrói autoridade — mas isso leva tempo. Ficar esperando cliente cair do céu enquanto você posta é como abrir uma loja e não falar com ninguém. Cliente não aparece, você vai até ele.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="error-card" onclick="toggleError(this)">
+      <div class="error-icon">🎯</div>
+      <div class="error-main">
+        <div class="error-title">"Vou fazer anúncios e resolver"</div>
+        <div class="error-sub">Clique para entender o problema</div>
+        <div class="error-detail">
+          <div class="error-detail-inner">Anúncio amplifica o que já funciona. Se você ainda não sabe o que falar, para quem falar e como converter uma conversa em cliente, jogar dinheiro em tráfego só vai queimar seu bolso mais rápido.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="error-card" onclick="toggleError(this)">
+      <div class="error-icon">🌐</div>
+      <div class="error-main">
+        <div class="error-title">"Meu cliente está só na internet"</div>
+        <div class="error-sub">Clique para entender o problema</div>
+        <div class="error-detail">
+          <div class="error-detail-inner">O mundo online é grande e cheio de concorrência. Enquanto você disputa atenção com milhares de pessoas, tem negócios do seu bairro, da sua cidade, precisando de ajuda agora — e quase ninguém está olhando pra eles.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Strategies -->
+  <div class="section-label">Por onde começar de verdade</div>
+  <div class="strategies">
+
+    <!-- Strategy 1 -->
+    <div class="strategy s1" onclick="toggleStrategy(this)">
+      <div class="strategy-header">
+        <div class="strategy-num">1</div>
+        <div class="strategy-info">
+          <div class="strategy-title">Sua lista de contatos no WhatsApp</div>
+          <div class="strategy-desc">A fonte de clientes que você já tem e ignora</div>
+        </div>
+        <div class="arrow">▶</div>
+      </div>
+      <div class="strategy-body">
+        <div class="strategy-content">
+          <div class="highlight">
+            💡 Você já tem uma lista de pessoas que te conhecem, confiam em você e podem te indicar — ela está no seu WhatsApp agora mesmo.
+          </div>
+          <div class="steps-list">
+            <div class="step-item">
+              <div class="step-circle">1</div>
+              <div class="step-text"><strong>Abra sua lista de contatos</strong> e pense: quem aqui pode me indicar ou conhece alguém que precisa de ajuda com redes sociais?</div>
+            </div>
+            <div class="step-item">
+              <div class="step-circle">2</div>
+              <div class="step-text"><strong>Não tente vender</strong> — pergunte se a pessoa conhece alguém que você possa ajudar. Indicação é mais fácil do que venda direta.</div>
+            </div>
+            <div class="step-item">
+              <div class="step-circle">3</div>
+              <div class="step-text"><strong>Seja específica</strong> ao explicar quem você ajuda. Quanto mais clara, mais fácil a pessoa lembrar de alguém.</div>
+            </div>
+            <div class="step-item">
+              <div class="step-circle">4</div>
+              <div class="step-text"><strong>Fale com todo mundo</strong> — família, amigos, conhecidos, ex-colegas. Você vai se surpreender de onde vem a primeira indicação.</div>
+            </div>
+          </div>
+          <div class="example-box">
+            <div class="example-label">Exemplo de mensagem</div>
+            <div class="example-text">"Oi [nome]! Tudo bem? Estou expandindo meu trabalho como social media e queria te perguntar: você conhece alguma empreendedora que está tendo dificuldades com o Instagram e poderia se beneficiar da minha ajuda? Qualquer indicação já me ajuda muito 😊"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Strategy 2 -->
+    <div class="strategy s2" onclick="toggleStrategy(this)">
+      <div class="strategy-header">
+        <div class="strategy-num">2</div>
+        <div class="strategy-info">
+          <div class="strategy-title">Clientes locais</div>
+          <div class="strategy-desc">Experiência real, proximidade e resultados rápidos</div>
+        </div>
+        <div class="arrow">▶</div>
+      </div>
+      <div class="strategy-body">
+        <div class="strategy-content">
+          <div class="highlight">
+            💡 Negócios locais precisam de ajuda e quase ninguém está oferecendo. Você não precisa ser a melhor — precisa estar presente.
+          </div>
+          <div class="steps-list">
+            <div class="step-item">
+              <div class="step-circle">1</div>
+              <div class="step-text"><strong>Olhe ao redor:</strong> salões, clínicas, restaurantes, lojas, pequenos comércios — todos têm Instagram e a maioria não sabe o que está fazendo.</div>
+            </div>
+            <div class="step-item">
+              <div class="step-circle">2</div>
+              <div class="step-text"><strong>Chegue pessoalmente</strong> quando possível — presença física gera muito mais confiança do que uma mensagem no direct.</div>
+            </div>
+            <div class="step-item">
+              <div class="step-circle">3</div>
+              <div class="step-text"><strong>Use como laboratório:</strong> você aprende o que funciona na prática, o que o cliente valoriza e como se comunicar com clareza.</div>
+            </div>
+            <div class="step-item">
+              <div class="step-circle">4</div>
+              <div class="step-text"><strong>Gere resultado real</strong> — mesmo que pequeno — e use como prova social pra atrair o próximo cliente.</div>
+            </div>
+            <div class="step-item">
+              <div class="step-circle">5</div>
+              <div class="step-text"><strong>Peça indicação</strong> ao final de cada trabalho. Cliente satisfeito é a melhor fonte de novos clientes.</div>
+            </div>
+          </div>
+          <div class="example-box">
+            <div class="example-label">Como abordar um negócio local</div>
+            <div class="example-text">"Oi! Sou social media e percebo que o seu negócio tem muito potencial no Instagram. Posso te mostrar rapidinho algumas ideias do que daria pra fazer diferente? Sem compromisso."</div>
+          </div>
+
+          <div style="margin-top:22px;padding-top:22px;border-top:1px dashed #d4c8bc;">
+            <div style="font-size:13px;font-weight:600;color:var(--accent3);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:12px;">⚠️ O erro que afasta clientes locais</div>
+            <p style="font-size:14px;line-height:1.7;color:#3d2e26;font-weight:300;margin-bottom:18px;">Não chegue com um pacote pronto debaixo do braço. Chegar falando em "feed, reels, stories, hashtag, engajamento" sem antes entender o que o cliente quer é o caminho mais rápido para perder a venda.</p>
+            <div style="font-size:13px;font-weight:600;color:var(--accent3);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:14px;">✦ Venda o que ela quer — entregue o que ela precisa</div>
+
+            <div style="display:flex;flex-direction:column;gap:12px;">
+
+              <div style="background:#f0f7f3;border:1px solid rgba(45,90,61,0.15);border-radius:10px;padding:16px 18px;">
+                <div style="font-size:12px;font-weight:600;color:var(--accent3);margin-bottom:6px;">Exemplo 1 — Ela quer mais clientes</div>
+                <p style="font-size:13.5px;line-height:1.7;color:#3d2e26;font-weight:300;">Pergunte como ela conquista clientes hoje e o que está falhando. Então monte uma estratégia focada nisso: conteúdo que atrai, chamadas pra ação claras, stories que convertem. Venda como "estratégia pra atrair mais clientes pelo Instagram" — não como "gestão de redes sociais".</p>
+              </div>
+
+              <div style="background:#f0f7f3;border:1px solid rgba(45,90,61,0.15);border-radius:10px;padding:16px 18px;">
+                <div style="font-size:12px;font-weight:600;color:var(--accent3);margin-bottom:6px;">Exemplo 2 — Ela quer ser conhecida na região</div>
+                <p style="font-size:13.5px;line-height:1.7;color:#3d2e26;font-weight:300;">Foque em visibilidade local: conteúdo geotaggeado, parcerias com outros negócios do bairro, publicações que mostram o dia a dia do espaço, fotos reais do local. Venda como "estratégia pra tornar seu negócio referência na região" — não como um pacote genérico de posts.</p>
+              </div>
+
+            </div>
+
+            <div style="margin-top:16px;background:#fff8f5;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:12px 16px;font-size:13px;line-height:1.7;color:#5a3a20;font-style:italic;">
+              A regra de ouro: primeiro entenda o sonho dela, depois mostre como o seu trabalho realiza esse sonho. Nunca o contrário.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Concept of selling -->
+  <div class="concept">
+    <div class="concept-label">✦ O conceito que muda tudo</div>
+    <div class="concept-title">Venda não é sobre empurrar — é sobre entender</div>
+    <div class="concept-text">Antes de qualquer estratégia, existe uma mudança de mentalidade que separa quem consegue clientes de quem fica esperando por eles:</div>
+    <div class="concept-items">
+      <div class="concept-item">
+        <div class="concept-dot"></div>
+        <div class="concept-item-text">Você não vai até o cliente pra vender — você vai pra entender o problema dela.</div>
+      </div>
+      <div class="concept-item">
+        <div class="concept-dot"></div>
+        <div class="concept-item-text">Quem pergunta, conduz. Deixe a pessoa falar e ouça com atenção.</div>
+      </div>
+      <div class="concept-item">
+        <div class="concept-dot"></div>
+        <div class="concept-item-text">Descubra o que ela precisa — e ofereça exatamente isso.</div>
+      </div>
+      <div class="concept-item">
+        <div class="concept-dot"></div>
+        <div class="concept-item-text">Nunca queira mais a venda do que ela quer o resultado. Isso aparece — e afasta.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-line"></div>
+    <div class="footer-text">Criado com carinho por</div>
+    <div class="footer-name">@jaquecriando</div>
+  </div>
+
+</div><!-- /container -->
+</div><!-- /main-content -->
+
+<script>
+  const SUPABASE_URL = 'https://bumhjyhaqewcfwojlgwc.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1bWhqeWhhcWV3Y2Z3b2psZ3djIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc5MjkxNTksImV4cCI6MjA5MzUwNTE1OX0.2l7naJq1_sug0zkENLH3A4yyaiXKjGyEbFM4BbBPzFs';
+
+  async function handleCapture() {
+    const nome = document.getElementById('inp-nome').value.trim();
+    const email = document.getElementById('inp-email').value.trim();
+    const whatsapp = document.getElementById('inp-whatsapp').value.trim();
+    const errorEl = document.getElementById('capture-error');
+    const btn = document.getElementById('btn-acessar');
+
+    errorEl.style.display = 'none';
+
+    if (!nome || !email || !whatsapp) {
+      errorEl.textContent = 'Preencha todos os campos para continuar.';
+      errorEl.style.display = 'block';
+      return;
+    }
+
+    if (!email.includes('@')) {
+      errorEl.textContent = 'Digite um e-mail válido.';
+      errorEl.style.display = 'block';
+      return;
+    }
+
+    btn.textContent = 'Salvando...';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({ nome, email, whatsapp })
+      });
+
+      if (!res.ok) throw new Error('Erro ao salvar');
+
+      // Sucesso — mostra o conteúdo
+      document.getElementById('capture-page').style.display = 'none';
+      document.getElementById('main-content').style.display = 'block';
+      window.scrollTo(0, 0);
+
+    } catch (e) {
+      errorEl.textContent = 'Ocorreu um erro. Tente novamente.';
+      errorEl.style.display = 'block';
+      btn.textContent = 'Quero acessar o guia →';
+      btn.disabled = false;
+    }
+  }
+
+  function toggleError(card) {
+    const isOpen = card.classList.contains('open');
+    document.querySelectorAll('.error-card').forEach(c => c.classList.remove('open'));
+    if (!isOpen) card.classList.add('open');
+  }
+
+  function toggleStrategy(el) {
+    const isOpen = el.classList.contains('open');
+    document.querySelectorAll('.strategy').forEach(s => s.classList.remove('open'));
+    if (!isOpen) el.classList.add('open');
+  }
+</script>
+</body>
+</html>
